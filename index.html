@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>How many times has utkarsh been wrong today?</title>
+	<title>How many times has this person been wrong today?</title>
+	<link rel="icon" href="https://www.onlygfx.com/wp-content/uploads/2018/04/4-wrong-stamp-cover.png">
 	<style type="text/css">
 		@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 		.content {
@@ -14,12 +15,35 @@
 		}
 
 	</style>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+	<script type='text/javascript'>    
+		var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1Zv8aOmV1JVTg29pyEJpmLtgMLUj4rpW5APXs5VY64So/';
+
+		function init() {
+			Tabletop.init( {
+				key: publicSpreadsheetUrl,
+				callback: showInfo,
+				simpleSheet: true 
+			} )
+		}
+
+		function showInfo(data, tabletop) {
+			// alert('Successfully processed!')
+			// console.log(data);
+			count.innerHTML = data[0].count;
+			question.innerHTML = data[0].question;
+			taunt.innerHTML = data[0].taunt;
+			document.title = data[0].question;
+		}
+
+		window.addEventListener('DOMContentLoaded', init)
+	</script>
 </head>
 <body>
 	<div class="content">
-		<h1>How many times has utkarsh been wrong today?</h1>
-		<h2>93 times.</h2>
-		<h4>Yes, that many.</h4>
+		<h1 id="question"></h1>
+		<h2 id="count"></h2>
+		<h4 id="taunt"></h4>
 	</div>
 </body>
 </html>
